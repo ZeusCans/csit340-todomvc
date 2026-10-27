@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 function Todos() {
+  const [text, setText] = useState('')
   const [todos] = useState([
     { id: 1, text: 'Learn the spread operator', completed: false },
     { id: 2, text: 'Set up Tailwind', completed: true },
@@ -15,6 +16,8 @@ function Todos() {
       <div className="relative bg-white shadow-[0_2px_4px_0_rgba(0,0,0,0.2),0_25px_50px_0_rgba(0,0,0,0.1)]">
         <form>
           <input
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             className="h-[65px] w-full py-4 pr-4 pl-[60px] text-2xl shadow-[inset_0_-2px_1px_rgba(0,0,0,0.03)] outline-none placeholder:text-black/40 placeholder:italic focus:shadow-[0_0_2px_2px_#cf7d7d]"
             placeholder="What needs to be done?"
           />
@@ -77,27 +80,4 @@ function Todos() {
             <li>
               <button
                 type="button"
-                className="cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10"
-              >
-                Active
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                className="cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10"
-              >
-                Completed
-              </button>
-            </li>
-          </ul>
-          <button type="button" className="cursor-pointer justify-self-end hover:underline">
-            Clear completed
-          </button>
-        </footer>
-      </div>
-    </section>
-  )
-}
-
-export default Todos
+                className="cursor-pointer rounded-[3px]
