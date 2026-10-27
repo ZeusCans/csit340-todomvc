@@ -18,6 +18,14 @@ function Todos() {
     setText('')
   }
 
+  function handleToggle(id) {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    )
+  }
+
   return (
     <section className="mx-auto max-w-[550px]">
       <h1 className="text-center text-[80px] font-extralight text-[#b83f45]">
@@ -52,7 +60,7 @@ function Todos() {
                 <input
                   type="checkbox"
                   checked={todo.completed}
-                  readOnly
+                  onChange={() => handleToggle(todo.id)}
                   className="ml-[15px] size-[30px] shrink-0 cursor-pointer accent-[#59a193]"
                 />
                 <span
@@ -78,3 +86,40 @@ function Todos() {
         <footer className="grid h-10 grid-cols-3 items-center border-t border-[#e6e6e6] px-[15px] text-[15px]">
           <span>
             <strong className="font-light">1</strong> item left
+          </span>
+          <ul className="flex justify-center gap-1">
+            <li>
+              <button
+                type="button"
+                className="cursor-pointer rounded-[3px] border border-[#b83f45]/20 px-[7px] py-[3px]"
+              >
+                All
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10"
+              >
+                Active
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10"
+              >
+                Completed
+              </button>
+            </li>
+          </ul>
+          <button type="button" className="cursor-pointer justify-self-end hover:underline">
+            Clear completed
+          </button>
+        </footer>
+      </div>
+    </section>
+  )
+}
+
+export default Todos
