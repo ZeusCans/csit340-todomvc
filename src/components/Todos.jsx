@@ -26,6 +26,10 @@ function Todos() {
     )
   }
 
+  function handleDelete(id) {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
+
   return (
     <section className="mx-auto max-w-[550px]">
       <h1 className="text-center text-[80px] font-extralight text-[#b83f45]">
@@ -74,6 +78,7 @@ function Todos() {
                 </span>
                 <button
                   type="button"
+                  onClick={() => handleDelete(todo.id)}
                   className="absolute right-[10px] hidden size-10 cursor-pointer text-[30px] text-[#949494] group-hover:block hover:text-[#c18585]"
                 >
                   ×
