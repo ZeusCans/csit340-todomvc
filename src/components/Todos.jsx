@@ -4,6 +4,8 @@ function Todos() {
   const [text, setText] = useState('')
   const [todos, setTodos] = useState([])
 
+  const activeCount = todos.filter((todo) => !todo.completed).length
+
   function handleSubmit(e) {
     e.preventDefault()
     const trimmed = text.trim()
@@ -62,3 +64,71 @@ function Todos() {
                   >
                     <input
                       type="checkbox"
+                      checked={todo.completed}
+                      onChange={() => handleToggle(todo.id)}
+                      className="ml-[15px] size-[30px] shrink-0 cursor-pointer accent-[#59a193]"
+                    />
+                    <span
+                      className={
+                        todo.completed
+                          ? 'flex-1 py-[15px] pr-[60px] pl-[15px] break-all text-[#949494] line-through'
+                          : 'flex-1 py-[15px] pr-[60px] pl-[15px] break-all'
+                      }
+                    >
+                      {todo.text}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(todo.id)}
+                      className="absolute right-[10px] hidden size-10 cursor-pointer text-[30px] text-[#949494] group-hover:block hover:text-[#c18585]"
+                    >
+                      ×
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </main>
+
+            <footer className="grid h-10 grid-cols-3 items-center border-t border-[#e6e6e6] px-[15px] text-[15px]">
+              <span>
+                <strong className="font-light">{activeCount}</strong>{' '}
+                {activeCount === 1 ? 'item' : 'items'} left
+              </span>
+              <ul className="flex justify-center gap-1">
+                <li>
+                  <button
+                    type="button"
+                    className="cursor-pointer rounded-[3px] border border-[#b83f45]/20 px-[7px] py-[3px]"
+                  >
+                    All
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    className="cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10"
+                  >
+                    Active
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    className="cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10"
+                  >
+                    Completed
+                  </button>
+                </li>
+              </ul>
+              <button type="button" className="cursor-pointer justify-self-end hover:underline">
+                Clear completed
+              </button>
+            </footer>
+          </>
+        )}
+      </div>
+    </section>
+  )
+}
+
+export default Todos
